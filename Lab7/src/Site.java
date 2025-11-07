@@ -8,6 +8,14 @@ public abstract class Site {
         this._rate = rate;
     }
 
-    // Every subclass must implement its own billing rule
-    public abstract double getBillableAmount();
+    // Template method
+    public double getBillableAmount() {
+        double base = getBaseAmount();
+        double tax = getTaxAmount(base);
+        return base + tax;
+    }
+
+    // Primitive operations to be implemented by subclasses
+    protected abstract double getBaseAmount();
+    protected abstract double getTaxAmount(double base);
 }
